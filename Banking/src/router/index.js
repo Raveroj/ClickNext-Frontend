@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import WithdrawView from '../views/WithdrawView.vue'
-// import TransactionView from '../views/TransactionView.vue' // สมมติว่ามีหน้าประวัติ
+import TransactionView from '../views/TransactionView.vue' // สมมติว่ามีหน้าประวัติ
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,11 +21,11 @@ const router = createRouter({
       name: 'withdraw',
       component: WithdrawView
     },
-    // {
-    //   path: '/transaction',
-    //   name: 'transaction',
-    //   component: TransactionView
-    // }
+    {
+      path: '/transaction',
+      name: 'transaction',
+      component: TransactionView
+    }
   ]
 })
 

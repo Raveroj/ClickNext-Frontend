@@ -1,9 +1,9 @@
 <script setup>
-import Login from '../components/Login.vue'
+import Transaction from '../components/Transaction.vue'
 </script>
 
 <template>
-  <main class="min-h-screen flex items-center justify-center bg-gray-100">
-    <Login />
-  </main>
+  <div>
+    <Transaction />
+  </div>
 </template>

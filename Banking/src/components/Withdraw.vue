@@ -2,33 +2,31 @@
   <div>
     <Menu />
   </div>
-  <main class="text-center mx-20">
+  <main class="text-center mx-20 mx-65">
     <div>
-      <h1 class="text-4xl font-bold ml-50">Your Balance {{ money }}</h1>
+      <h1 class="text-4xl font-bold ">ยอดเงินคงเหลือ {{ store.currentBalance.toLocaleString() }}</h1>
     </div>
 
-    <div class="flex flex-col items-center mt-10">
-      <label
-        class="block text-center px-8 mb-1 font-Bold mt-10 max-w-[400px] item-center"
-      >
-        กรอกจำนวนเงิน
+    <div class=" items-center mt-10 ">
+      <label class="block text-center  mb-1 font-Bold mt-10 item-center ">
+        กรอกจำนวนเงิน *
       </label>
       <input
         type="number"
-        class="cursor-pointer bg-white border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 ml-50"
+        class="cursor-pointer bg-white border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 "
         placeholder="กรอกจำนวนเงิน"
         v-model="amount"
       />
       <p v-if="validate != ''" class="text-red-500 text-sm mt-1">{{ validate }}</p>
       <div class="items-center">
         <button
-          class="cursor-pointer bg-green-500 border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 ml-50"
+          class="cursor-pointer bg-green-500 border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 mx-5"
           @click="Deposit"
         >
           ฝาก
         </button>
         <button
-          class="cursor-pointer bg-red-500 border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 ml-50"
+          class="cursor-pointer bg-red-500 border-2 border-gray-100 rounded-lg px-6 py-2 mt-5 hover:bg-rose-50 mx-5"
           @click="withdrawMoney"
         >
           ถอน
@@ -49,8 +47,10 @@
 import { ref } from "vue";
 import Menu from "@/components/Menu.vue";
 import ModalAlert from "@/components/ModalAlert.vue";
+import { useTransactionStore } from "@/stores/transactionStore";
 
-const money = ref(Number(1000000));
+
+const store = useTransactionStore();
 const amount = ref(Number(0));
 const validate = ref("");
 const showPopup = ref(false);
@@ -70,8 +70,8 @@ const doTransaction = () => {
   if (actionType.value === "withdraw") {
     if (amount.value !== null && amount.value !== undefined && amount.value !== "") {
       if (amount.value >= 0 && amount.value <= 100000) {
-        if (amount.value <= money.value) {
-          money.value -= amount.value;
+        if (amount.value <= store.currentBalance) {
+          store.currentBalance -= amount.value;
         } else {
           validate.value = "ยอดเงินคงเหลือไม่เพียงพอสำหรับการถอน";
         }
@@ -81,14 +81,15 @@ const doTransaction = () => {
     } else {
       validate.value = "กรุณากรอกจำนวนเงิน";
     }
+    store.addTransaction(amount.value, actionType.value);
+  }
 
-
-  } else if (actionType.value === "deposit") {
+  else if (actionType.value === "deposit") {
     {
       if (amount.value !== null && amount.value !== undefined && amount.value !== "") {
         if (amount.value >= 0 && amount.value <= 100000) {
           showPopup.value = true;
-          money.value += amount.value;
+          store.currentBalance += amount.value;
         } else {
           validate.value = "ฝาก-ถอน ได้ตั้งแต่ 0 - 100,000 บาท";
         }
@@ -96,6 +97,7 @@ const doTransaction = () => {
         validate.value = "กรุณากรอกจำนวนเงิน";
       }
     }
+    store.addTransaction(amount.value, actionType.value);
   } else {
     // ไม่ควรจะเกิดขึ้น
     console.error("Unknown action type:", actionType.value);
