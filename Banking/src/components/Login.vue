@@ -3,25 +3,25 @@
     <form @submit.prevent="onSubmit" class="w-full">
 
       <div class="items-center mb-4">
-        <label class="block text-left px-8 mb-1 font-medium"> Email </label>
+        <label class="block text-left px-8 mb-1 font-Bold"> Email </label>
         <input
           v-model="email"
           type="text"
           placeholder="Email*"
-          class="w-3/4 border-2 rounded-lg px-2.5 py-1"
+          class="w-3/4 border-2 rounded-lg px-2.5 py-1 bg-white"
         />
-        <p v-if="validateMsg" class="text-red-500 text-sm mt-1">{{ validateMsg }}</p>
+        <p v-if="validateMsg != '' " class="text-red-500 text-sm mt-1">{{ validateMsg }}</p>
       </div>
 
       <div class="items-center mb-4">
-        <label class="block text-left px-8 mb-1 font-medium"> Password </label>
+        <label class="block text-left px-8 mb-1 font-Bold"> Password </label>
         <input
           v-model="password"
           type="password"
           placeholder="Password*"
-          class="w-3/4 border-2 rounded-lg px-2.5 py-1"
+          class="w-3/4 border-2 rounded-lg px-2.5 py-1 bg-white"
         />
-        <p v-if="validateFill" class="text-red-500 text-sm mt-1">{{ validateFill }}</p>
+        <p v-if="validateFill != ''" class="text-red-500 text-sm mt-1">{{ validateFill }}</p>
       </div>
 
       <div class="items-center">
@@ -66,6 +66,6 @@ const onSubmit = () => {
 
   // 4. ถ้าผ่านหมดทุกด่าน
   console.log("Login สำเร็จ!");
-  router.push("/HomeView");
+  router.push("/withdraw-Deposit");
 };
 </script>

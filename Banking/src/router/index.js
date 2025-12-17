@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/WithdrawView.vue'
+import WithdrawView from '../views/WithdrawView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +12,9 @@ const router = createRouter({
       component: LoginView // ให้แสดงหน้านี้ (ซึ่งข้างในมี component Login อยู่)
     },
     {
-      path: '/HomeView',      // เมื่อเข้าหน้าแรก
-      name: 'HomeView',
-      component: HomeView // ให้แสดงหน้านี้ 
+      path: '/Withdraw-Deposit',      // เมื่อเข้าหน้าแรก
+      name: 'Withdraw-Deposit',
+      component: WithdrawView // ให้แสดงหน้านี้
     },
 
   ],
