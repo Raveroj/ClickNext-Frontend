@@ -3,7 +3,7 @@
     <form @submit.prevent="onSubmit" class="w-full">
 
       <div class="items-center mb-4">
-        <label class="block text-left px-8 mb-1 font-Bold"> Email </label>
+        <label class=" text-left px-8 mb-1 font-Bold"> Email </label>
         <input
           v-model="email"
           type="text"
@@ -14,7 +14,7 @@
       </div>
 
       <div class="items-center mb-4">
-        <label class="block text-left px-8 mb-1 font-Bold"> Password </label>
+        <label class=" text-left px-8 mb-1 font-Bold"> Password </label>
         <input
           v-model="password"
           type="password"
@@ -66,6 +66,10 @@ const onSubmit = () => {
 
   // 4. ถ้าผ่านหมดทุกด่าน
   console.log("Login สำเร็จ!");
+
+  localStorage.setItem("isAuth", "true");
+  localStorage.setItem("userEmail", email.value);
+
   router.push("/withdraw-Deposit");
 };
 </script>

@@ -10,9 +10,9 @@
 
  <sidebar class="w-64 bg-gray-100 h-full fixed left-0 p-4 border-r-2">
   <div class="text-center font-bold mb-6 bg-gray-300 rounded-lg py-2">
-    <RouterLink to="/withdraw" class="text-center font-bold">Deposit/Withdraw</RouterLink>
+    <RouterLink to="/withdraw-Deposit" class="text-center font-bold">Deposit/Withdraw</RouterLink>
   </div>
-  <div class="text-center font-bold mb-6">
+  <div class="text-center font-bold mb-6 bg-gray-300 rounded-lg py-2">
     <RouterLink to="/transaction">Transaction</RouterLink>
   </div>
   </sidebar>
@@ -24,6 +24,9 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const logout = () => {
+  console.log("Logout สำเร็จ!");
+  localStorage.removeItem("isAuth");
+  localStorage.removeItem("userEmail");
   router.push("/");
 };
 
