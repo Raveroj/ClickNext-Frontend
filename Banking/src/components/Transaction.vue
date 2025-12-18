@@ -22,7 +22,9 @@
 
         <!-- ส่วนเนื้อหาตาราง-->
         <tbody class="divide-y divide-gray-200">
-          <!--ส่วน loop แสดงข้อมูลใน history ใน localstorage-->
+          <!--ส่วน loop แสดงข้อมูลใน history ใน localstorage
+          โดยที่ item ตัวแปรที่เราสร้าง มาเก็บข้อมูล ๗าก history ใน localstorage -->
+
           <tr v-for="item in history" :key="item.id" class="hover:bg-gray-50">
             <!--วันที่ฝาก-ถอนเงิน ที่เอามาจาก localstorage ที่เก็บไว้ตอนฝาก-ถอน ในหน้า Withdraw-->
             <td class="px-6 py-4 border">{{ item.datetime }}</td>
@@ -42,7 +44,8 @@
 
             <!--ส่วนปุ่ม edit-->
             <td class="px-6 py-4 border text-center">
-              <!--ถ้า item status เป็น ฝาก ถึงจะมีปุ่มให้ edit พอกดแล้วจะส่ง item ที่เรากด edit จาก localstorage ส่งไป -->
+              <!--ถ้า item status เป็น ฝาก ถึงจะมีปุ่มให้ edit พอกดแล้ว จะส่ง item ที่เรากด edit จาก localstorage ส่งไป
+              ระบบจะส่ง item นี้เข้าไปในฟังก์ชันเมื่อกด @click="openEdit(item)" ระบบก็จะรู้ทันทีว่าคลิกที่ตัวไหน-->
               <button
                 v-if="item.status === 'ฝาก'"
                 @click="openEdit(item)"
@@ -70,7 +73,9 @@
 
     <!-- ส่วน alert edit
     ถ้า showEditModal เป็น true จะแสดง alert
-    ลูกมีตัวแปร item รอรับค่าที่ส่งมาจากแม่ชื่อ selectedItem
+
+    ลูกมีตัวแปร item รอรับค่าที่ส่งมาจากแม่ชื่อ selectedItem ที่เก็บข้อมูลรายการที่เรากด edit
+
     ถ้าผู้ใช้กดยืนยัน ได้สถานะ confirm กลับมา กับ ค่าเงินที่ต้องการแก้ไข ตัวแม่จะเรียก function saveedit -->
     <TransactionEdit
       v-if="showEditModal"
@@ -101,7 +106,7 @@ const selectedItem = ref(null);
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
 
-// ตอนี่หน้าโหลด ให้ดึงข้อมูลจาก localstorage มาเก็บในตัวแปร history
+// ตอนี่หน้าโหลด ให้ดึงข้อมูลจาก history ใน localstorage มาเก็บในตัวแปร saveData
 onMounted(() => {
   const savedData = localStorage.getItem("history");
   // ถ้า sacvedData มีค่า ให้แปลงจาก JSON ที่เป็น string กลับมาเป็น object แล้วเก็บใน history
