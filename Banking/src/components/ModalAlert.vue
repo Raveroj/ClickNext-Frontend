@@ -1,7 +1,6 @@
 <template>
   <div
     class="fixed inset-0 flex justify-center items-center z-50"
-    @click.self="$emit('cancel')"
   >
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm mx-4">
 
@@ -16,6 +15,7 @@
         </span>
       </p>
 
+      <!-- ส่วนให้เลือกปุ่มว่าจะฝากหรือไม่ -->
       <div class="flex items-center space-x-6">
         <button
           @click="$emit('confirm')"
@@ -39,6 +39,7 @@
 <script setup>
 // รับ props จากตัวแม่
 const props = defineProps({
+  //รอรับ amount เป็น Number ค่าเริ่มต้น 0
   amount: {
     type: Number,
     required: true,
